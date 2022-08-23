@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return response("index");
     }
 
     /**
@@ -36,7 +36,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        return response("store");
     }
 
     /**
@@ -47,7 +47,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return response("show");
     }
 
     /**
@@ -70,7 +70,7 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        return response("update");
     }
 
     /**
@@ -81,6 +81,6 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        return response("destroy");
     }
 }

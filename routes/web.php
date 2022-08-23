@@ -19,3 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('cars', CarController::class);
+
+Route::controller(PostController::class)->group(function () {
+    Route::get('/posts', 'index')->name('posts.index');
+    Route::post('/posts', 'store')->name('posts.store');
+    Route::get('/posts/{post}', 'show')->name('posts.show');
+    Route::put('/posts/{post}', 'update')->name('posts.update');
+    Route::delete('/posts/{post}', 'destroy')->name('posts.destroy');
+});
