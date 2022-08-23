@@ -24,7 +24,7 @@ Route::resource('cars', CarController::class);
 Route::controller(PostController::class)->group(function () {
     Route::get('/posts', 'index')->name('posts.index');
     Route::post('/posts', 'store')->name('posts.store');
-    Route::get('/posts/{post}', 'show')->name('posts.show');
+    Route::get('/posts/{post}', 'show')->name('posts.show')->middleware('check.age');;
     Route::put('/posts/{post}', 'update')->name('posts.update');
     Route::delete('/posts/{post}', 'destroy')->name('posts.destroy');
 });
