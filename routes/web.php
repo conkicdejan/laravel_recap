@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PostController::class, 'index']);
 
 Route::resource('cars', CarController::class);
+
+Route::resource('books', BookController::class);
 
 Route::controller(PostController::class)->group(function () {
     Route::get('/posts', 'index')->name('posts.index');
