@@ -15,7 +15,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return response("index");
+        $first_name = 'Dejan';
+
+        return view('posts.index', ['first_name' => $first_name]);
     }
 
     /**
