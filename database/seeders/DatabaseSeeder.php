@@ -20,6 +20,10 @@ class DatabaseSeeder extends Seeder
         ]);
         \App\Models\User::factory(10)->create();
 
+        //Seed the countries
+        $this->call('CountriesSeeder');
+        $this->command->info('Seeded the countries!');
+
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
