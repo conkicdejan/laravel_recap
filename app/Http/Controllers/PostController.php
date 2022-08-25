@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -15,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return response("index");
+        return view('posts.index', ['posts' => Post::all()]);
     }
 
     /**
@@ -25,7 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -36,7 +38,9 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        return response("store");
+        $validated = $request->validated();
+        $post = Post::create($validated);
+        return redirect('posts');
     }
 
     /**
@@ -47,7 +51,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return response("show");
+        return view('posts.show', ['post' => $post]);
     }
 
     /**
@@ -58,7 +62,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.create', ['post' => $post]);
     }
 
     /**
@@ -68,9 +72,14 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(StorePostRequest $request, Post $post)
     {
-        return response("update");
+
+        Gate::authorize('update', $post);
+
+        $validated = $request->validated();
+        $post->update($validated);
+        return redirect('posts');
     }
 
     /**
@@ -81,6 +90,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        return response("destroy");
+        Gate::authorize('delete', $post);
+
+        $post->delete();
+        return redirect('posts');
     }
 }
