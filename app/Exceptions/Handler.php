@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use App\Http\Controllers\PostController;
 
 class Handler extends ExceptionHandler
 {
@@ -22,7 +23,7 @@ class Handler extends ExceptionHandler
      * @var array<int, class-string<\Throwable>>
      */
     protected $dontReport = [
-        //
+        PostController::class,
     ];
 
     /**
@@ -45,6 +46,10 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        $this->renderable(function (CustomException $e, $request) {
+            // return response()->json(['message' => 'This is my custom error from Handler']);
         });
     }
 }

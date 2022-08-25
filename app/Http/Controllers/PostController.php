@@ -7,6 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use App\Exceptions\CustomException;
 
 class PostController extends Controller
 {
@@ -17,6 +18,19 @@ class PostController extends Controller
      */
     public function index()
     {
+
+        // ddd;
+
+        try {
+            Post::someFunction();
+        } catch (\Exception $e) {
+            throw new CustomException();
+        }
+
+        // if (!isset($some)) {
+        //     throw new CustomException();
+        // }
+
         return view('posts.index', ['posts' => Post::all()]);
     }
 
